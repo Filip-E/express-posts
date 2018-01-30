@@ -7,6 +7,14 @@
 </head>
 <body>
   <h2>All Comments</h2>
-
+  <ul class='comment'>
+  <% for(var i=0; i < comments.length; i++) {%>
+    <li class='comment'>
+      <span><%= comments[i].name %></span>
+      <span><%= comments[i].email %></span>
+      <span><%= comments[i].body %></span>
+    </li>
+  <% } %>
+  </ul>
 </body>
 </html>
