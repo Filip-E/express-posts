@@ -1,9 +1,10 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const request = require('request');
 
-app.listen(process.env.PORT || 3000, () => {
-  console.log('Listening on port 3000');
+app.listen(process.env.PORT || 3001, () => {
+  console.log('Listening on port 3001');
 });
 
 app.set('view engine', 'ejs');
@@ -17,7 +18,13 @@ app.get('/', (req, res) => {
 });
 
 // List all posts
-app.get('/posts', (req, res) => {});
+app.get('/posts', (req, res) => {
+	request('http://jsonplaceholder.typicode.com/posts', function(error, response, body){
+		 if (error) return console.log(error);
+		 var test = JSON.parse(body);
+		 res.render('posts.ejs', {posts: test});
+	});
+});
 
 // Show the search form
 app.get('/search', (req, res) => {
@@ -25,4 +32,8 @@ app.get('/search', (req, res) => {
 });
 
 // Find all comments for post
-app.post('/search', (req, res) => {});
+app.post('/search', (req, res) => {
+	 var query = { name: req.body }
+	 console.log(query);
+	
+});
